@@ -29,5 +29,7 @@ https://www.ozon.ru/?__rr=1&abt_att=1&origin_referer=yandex.ru  ; https://www.wi
 
 ## Страница каталога(типы товара)
 На странице отображаются типы товара, нажав на тип, появляютя товары соответсвенного типа.
+
+
 <img width="697" height="401" alt="db_final_project" src="https://github.com/user-attachments/assets/0269b293-1ead-4a84-8af7-194d0c520eea" />
 
