@@ -1,5 +1,6 @@
 # final_project_user_shop
-# Список референсов
+# Список референсов:
+https://www.ozon.ru/?__rr=1&abt_att=1&origin_referer=yandex.ru  ; https://www.wildberries.ru/  ; https://www.geeksforgeeks.org/python/e-commerce-website-using-django/
 
 # Что пользователь может делать на веб-приложении
 На главной странице расположен католог товаров. Пользователь может нажать на "подробнее" и узнать информацию об товаре, добавить его в корзину. Данные о товаре и пользователе берутся из базы данных.
