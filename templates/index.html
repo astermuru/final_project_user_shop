@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Онлайн магазин</h1>
+    <h2>Каталог товаров</h2>
+    <style>
+        .cart-img{
+            position: relative;
+            width: 100px;
+        }
+        .cart-img::after{
+            content: "{{ cart_count}}";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+
+            background-color: black;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            font-size: 30px;
+        }
+
+    </style>
+    <div>
+        <a href="{{ url_for('add_product') }}"><button>Добавить товар</button></a>
+    </div>
+    <div class="cart-img">
+        <a href="{{ url_for('cart') }}">
+        <img src="{{ url_for('static', filename='img/basket.png') }}" alt="" width="100">
+        </a>
+    </div>
+    
+    
+    <div class="products">
+        {% for product in products %}
+            <div class="product">
+                <h3>{{ product[1] }}</h3>
+                <p>{{ product[3] }}</p>
+                <p>Цена: {{ product[2] }} руб.</p>
+                {% if product[4] %}
+                    <img src="{{ product[4] }}" width="200">
+                {% endif %}
+                <a href="{{ url_for('product', product_id=product[0]) }}"><button>Подробнее</button></a>
+                <a href="{{ url_for('add_to_cart', product_id=product[0]) }}"><button>Добавить в корзину</button></a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

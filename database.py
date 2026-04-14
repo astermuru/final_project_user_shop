@@ -1,18 +1,53 @@
 import sqlite3
 import os
+from werkzeug.security import generate_password_hash, check_password_hash
+SALT = "Ijaigawoi32"
 
 def create_database():
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
+
+     #Создание таблицы user
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS user (
+            id iNTEGER PRIMARY KEY AUTOINCREMENT,
+            login VARCHAR(1000) NOT NULL,
+            password VARCHAR(256) NOT NULL,
+            type_user TEXT NOT NULL
+        )
+    """)
+    conn.commit()
+
+     #Создание таблицы type_products
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS type_products (
+            id iNTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL
+
+        )
+    """)
+    conn.commit()
+
+       #Создание таблицы type_user
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS type_user (
+            id iNTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL
+
+        )
+    """)
+    conn.commit()
+
 
     cursor.execute('''
             CREATE TABLE IF NOT EXISTS products (
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    name TEXT NOT NULL,
                    price REAL NOT NULL,
-                   description TEXT DEFAULT "",
-                   image TEXT DEFAULT "",
                    type_products TEXT NOT NULL,
+                   description TEXT DEFAULT "",
+                   image TEXT DEFAULT ""
+    
             )
                    
         ''')
@@ -20,16 +55,16 @@ def create_database():
     conn.commit()
     conn.close()
 
-def add_product(name, price, description="", image="", ):
+def add_product(name, price,  type_products, description="", image="", ):
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
 
     cursor.execute('''
                    INSERT INTO products
-                   (name, price, description, image, type_products)
+                   (name, price, type_products, description, image)
                    VALUES(?,?,?,?)
                    
-                   ''', (name, price, description, image, type_products))
+                   ''', (name, price, type_products, description, image))
     conn.commit()
     conn.close()
 
@@ -56,8 +91,9 @@ def get_product_by_id(product_id):
             "id":product[0],
             "name": product[1],
             "price": product[2],
-            "description": product[3],
-            "image": product[4],
+            "type_products": product[3],
+            "description": product[4],
+            "image": product[5],
         }
     else:
         return None
@@ -86,6 +122,50 @@ def validate_cart(cart):
         if not product:
             del cart[i]
     return cart
+
+# пользователь
+def add_user(login, password):
+    conn = sqlite3.connect("todo.db")
+    cursor = conn.cursor() 
+    hashed_password = generate_password_hash(password + SALT)
+    
+
+    cursor.execute("INSERT INTO user (login, password) VALUES (?, ?)", (login, hashed_password ))
+    conn.commit()
+
+def get_users():
+    conn = sqlite3.connect("todo.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM user")
+    users = cursor.fetchall()
+    return users
+
+def check_user_exists(login):
+    conn = sqlite3.connect("todo.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM user WHERE login=?", (login, ))
+    user = cursor.fetchone()
+    return True if user else False
+
+def auth_user(login, password):
+    #0- авторизация прошла
+    #-1 -  что пошло не так
+
+    # 1. Получить пользвателя по логину
+    conn = sqlite3.connect("todo.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM user WHERE login=?", (login, ))
+    user = cursor.fetchone() #(2, "admin", "sjgiigjaiihb")
+    if not user:
+        return -1
+
+    # 2. сравнить сгенерированный хеш с тем, что хранится
+    if check_password_hash(user[2], password+SALT):
+        return user[0]
+    
+    return -1
 
 if __name__ == "__main__":
     create_database()

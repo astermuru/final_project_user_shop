@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Корзина</h1>
+    <style>
+        table{
+            border-collapse: collapse;
+            border: 2px solid rgb(140, 140, 140);
+            font-family: sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        th, td {
+            border: 2px solid rgb(140, 140, 140);
+            padding: 8px 10px;
+        }
+    </style>
+    <table>
+        <tr>
+            <th>Фото</th>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            
+        </tr>
+        {% for product in cart %}
+            <tr>
+                <td>
+                    <img src="{{ product.product_info.image }}" alt="" width="100">
+                    <td>{{ product.product_info.name }}</td>
+                    <td> {{ product.product_info.description }} </td>
+                    <td>{{ product.product_info.price }}</td>
+                    <td>
+                        <form action="{{ url_for('change_cart_product_amount')}}" method="POST">
+                            <button type="submit">-</button> 
+                            <input type="hidden" name="product_id" value="{{ product.product_info.id }}">
+                            <input type="hidden" name="action" value="minus">
+                        </form>
+                        {{ product.count }} 
+                        <form action="{{ url_for('change_cart_product_amount')}}" method="POST">
+                            <button type="submit">+</button> 
+                            <input type="hidden" name="product_id" value="{{ product.product_info.id }}">
+                            <input type="hidden" name="action" value="plus">
+                        </form>
+                    </td>
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="4">Итого:</td>
+                <td>{{ cart_summa }}</td>
+            </tr>
+    </table>
+</body>
+</html>
