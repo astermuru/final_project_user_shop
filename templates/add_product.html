@@ -14,6 +14,17 @@
         <label for="price">Цена:</label><br>
         <input type="number" id="price" name="price" required><br><br>
 
+        <div>
+        <!--выпадающее меню-->
+        <select name="type_products" id="">
+            <option value="electronics">электроника</option>
+            <option value="food products">продовольственные товары</option>
+            <option value="clothes">одежда</option>
+            <option value="shoes">обувь</option>
+            <option value="children's products">детские товары</option>
+        </select>
+    </div>
+
         <label for="description">Описание:</label><br>
         <textarea id="description" name="description" required></textarea><br><br>
 
@@ -21,8 +32,11 @@
         <input type="file" id="image" name="image" required>
         
         <br><br>
+        
 
         <input type="submit" value="Добавить товар">
     </form>
 </body>
 </html>
+<div>
+        

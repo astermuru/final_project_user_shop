@@ -107,6 +107,68 @@ def change_cart_product_amount():
     session["cart"] = cart
     return redirect(url_for("cart"))
 
+# пользователь
+@app.route("/register", methods=["POST", "GET"])
+def regster_page():
+    if request.method == "GET":
+        return render_template("register.html")
+    else:
+        login = request.form["login"]
+        pass1 = request.form["pass1"]
+        pass2 = request.form["pass2"]
+        errors = []
+
+        # проверка насуществующего пользвателя
+        if database.check_user_exists(login):
+            errors.append("Такой пользователь уже существует")
+
+        # проверка на одинаковые пароли
+        if pass1 != pass2:
+            errors.append("Пароли не совпадают")
+
+        # проверка на качество пароля
+        if len(pass1) < 8:
+            errors.append("Длина пароля должна быть больше 8 символов")
+            
+        # проверка на регистрацию
+        if len(errors) == 0:
+            # регистрация
+            database.add_user(login, pass1)
+            return render_template("success_register.html")
+        else:
+            print(errors)
+            return render_template("register.html", errors=errors)
+
+@app.route("/admin")
+def admin_page():
+    users = database.get_users()
+
+    return render_template("admin.html", users=users)
+
+@app.route("/login", methods=["POST", "GET"])
+def login_page():
+    if request.method == "GET":
+        return render_template("login.html")
+    else:
+        login = request.form["login"]
+        password = request.form["password"]
+        user_id = database.auth_user(login,password)
+
+        if user_id >= 0:
+            print("Успешный вход")
+            session["user_id"] =  user_id
+            session["login"] = login
+            return redirect(url_for("index"))
+            
+        else:
+            print("Неуспешный вход")
+            return render_template("login.html", errors=["Неверный логин или пароль"])
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("login_page"))
+
     
 
 if __name__ == "__main__":

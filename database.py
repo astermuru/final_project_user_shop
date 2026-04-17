@@ -8,34 +8,47 @@ def create_database():
     cursor = conn.cursor()
 
      #Создание таблицы user
-    cursor.execute("""
+    cursor.execute('''
         CREATE TABLE IF NOT EXISTS user (
             id iNTEGER PRIMARY KEY AUTOINCREMENT,
             login VARCHAR(1000) NOT NULL,
             password VARCHAR(256) NOT NULL,
-            type_user TEXT NOT NULL
+            type_user NOT NULL,
+            FOREIGN KEY (type_user) REFERENCES Type_products(id)
         )
-    """)
+    ''')
     conn.commit()
 
      #Создание таблицы type_products
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS type_products (
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Type_products (
             id iNTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL
 
         )
-    """)
+    ''')
+
     conn.commit()
 
        #Создание таблицы type_user
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS type_user (
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Type_user (
             id iNTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL
 
         )
-    """)
+    ''')
+    conn.commit()
+
+    cursor.execute('''
+        INSERT INTO Type_user (name) VALUES (?) 
+                   ''', ("user", ))
+    conn.commit()
+    cursor.execute('''
+        INSERT INTO Type_user (name) VALUES (?) 
+                   ''', ("admin", ))
+    conn.commit()
+    cursor.execute("INSERT INTO Type_user (name) VALUES (?)", ("super_admin", ) )
     conn.commit()
     
 
@@ -44,9 +57,10 @@ def create_database():
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    name TEXT NOT NULL,
                    price REAL NOT NULL,
-                   type_products TEXT NOT NULL,
+                   type_products NOT NULL,
                    description TEXT DEFAULT "",
-                   image TEXT DEFAULT ""
+                   image TEXT DEFAULT "",
+                   FOREIGN KEY (type_products) REFERENCES Type_products(id)
     
             )
                    
