@@ -37,7 +37,7 @@ def create_database():
         )
     """)
     conn.commit()
-
+    
 
     cursor.execute('''
             CREATE TABLE IF NOT EXISTS products (
