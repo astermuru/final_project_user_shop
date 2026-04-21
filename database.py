@@ -13,7 +13,7 @@ def create_database():
             id iNTEGER PRIMARY KEY AUTOINCREMENT,
             login VARCHAR(1000) NOT NULL,
             password VARCHAR(256) NOT NULL,
-            type_user NOT NULL,
+            type_user INTEGER,
             FOREIGN KEY (type_user) REFERENCES Type_products(id)
         )
     ''')
@@ -27,7 +27,51 @@ def create_database():
 
         )
     ''')
+    conn.commit()
 
+    cursor.execute('''
+            INSERT INTO Type_products(name) VALUES (?)
+                   ''', ("electronics", ))
+    conn.commit()
+    cursor.execute('''
+            INSERT INTO Type_products(name) VALUES (?)
+                   ''', ("food products", ))
+    conn.commit()
+    cursor.execute('''
+            INSERT INTO Type_products(name) VALUES (?)
+                   ''', ("clothes", ))
+    conn.commit()
+    cursor.execute('''
+            INSERT INTO Type_products(name) VALUES (?)
+                   ''', ("shoes", ))
+    conn.commit()
+    cursor.execute('''
+            INSERT INTO Type_products(name) VALUES (?)
+                   ''', ("children's products", ))
+    conn.commit()
+    cursor.execute('''
+            INSERT INTO Type_products(name) VALUES (?)
+                   ''', ("care cosmetics", ))
+    conn.commit()
+    cursor.execute('''
+            INSERT INTO Type_products(name) VALUES (?)
+                   ''', ("pet supplies", ))
+    conn.commit()
+    cursor.execute('''
+            INSERT INTO Type_products(name) VALUES (?)
+                   ''', ("construction and renovation", ))
+    conn.commit()
+    cursor.execute('''
+            INSERT INTO Type_products(name) VALUES (?)
+                   ''', ("pharmacy", ))
+    conn.commit()
+    cursor.execute('''
+            INSERT INTO Type_products(name) VALUES (?)
+                   ''', ("accessories", ))
+    conn.commit()
+    cursor.execute('''
+            INSERT INTO Type_products(name) VALUES (?)
+                   ''', ("hobby", ))
     conn.commit()
 
        #Создание таблицы type_user
@@ -57,7 +101,7 @@ def create_database():
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    name TEXT NOT NULL,
                    price REAL NOT NULL,
-                   type_products NOT NULL,
+                   type_products INTEGER,
                    description TEXT DEFAULT "",
                    image TEXT DEFAULT "",
                    FOREIGN KEY (type_products) REFERENCES Type_products(id)
@@ -139,16 +183,16 @@ def validate_cart(cart):
 
 # пользователь
 def add_user(login, password):
-    conn = sqlite3.connect("todo.db")
+    conn = sqlite3.connect("shop.db")
     cursor = conn.cursor() 
     hashed_password = generate_password_hash(password + SALT)
     
 
     cursor.execute("INSERT INTO user (login, password) VALUES (?, ?)", (login, hashed_password ))
     conn.commit()
-
+    conn.close()
 def get_users():
-    conn = sqlite3.connect("todo.db")
+    conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM user")
@@ -156,7 +200,7 @@ def get_users():
     return users
 
 def check_user_exists(login):
-    conn = sqlite3.connect("todo.db")
+    conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM user WHERE login=?", (login, ))
@@ -168,7 +212,7 @@ def auth_user(login, password):
     #-1 -  что пошло не так
 
     # 1. Получить пользвателя по логину
-    conn = sqlite3.connect("todo.db")
+    conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM user WHERE login=?", (login, ))
     user = cursor.fetchone() #(2, "admin", "sjgiigjaiihb")

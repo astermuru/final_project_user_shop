@@ -33,6 +33,13 @@
     <div>
         <a href="{{ url_for('add_product') }}"><button>Добавить товар</button></a>
     </div>
+    <div>
+        <a href="{{ url_for('regster_page') }}"><button>Регистрация</button></a>
+    </div>
+    <div>
+        <a href="{{ url_for('login_page') }}"><button>Войти</button></a>
+    </div>
+
     <div class="cart-img">
         <a href="{{ url_for('cart') }}">
         <img src="{{ url_for('static', filename='img/basket.png') }}" alt="" width="100">
