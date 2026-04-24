@@ -53,8 +53,8 @@
                 <h3>{{ product[1] }}</h3>
                 <p>{{ product[3] }}</p>
                 <p>Цена: {{ product[2] }} руб.</p>
-                {% if product[4] %}
-                    <img src="{{ product[4] }}" width="200">
+                {% if product[5] %}
+                    <img src="{{ product[5] }}" width="200">
                 {% endif %}
                 <a href="{{ url_for('product', product_id=product[0]) }}"><button>Подробнее</button></a>
                 <a href="{{ url_for('add_to_cart', product_id=product[0]) }}"><button>Добавить в корзину</button></a>

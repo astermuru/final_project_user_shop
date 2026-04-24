@@ -169,6 +169,15 @@ def logout():
     session.clear()
     return redirect(url_for("login_page"))
 
+@app.route("/profile/<int:user_id>")
+def profile(user_id):
+    user = database.get_user_by_id(user_id)
+    if user:
+        return render_template("profile.html", user=user)
+    else:
+        return redirect(url_for('index'))
+
+
     
 
 if __name__ == "__main__":

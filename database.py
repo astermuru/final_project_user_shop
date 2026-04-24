@@ -120,7 +120,7 @@ def add_product(name, price,  type_products, description="", image="", ):
     cursor.execute('''
                    INSERT INTO products
                    (name, price, type_products, description, image)
-                   VALUES(?,?,?,?)
+                   VALUES(?,?,?,?,?)
                    
                    ''', (name, price, type_products, description, image))
     conn.commit()
@@ -191,6 +191,7 @@ def add_user(login, password):
     cursor.execute("INSERT INTO user (login, password) VALUES (?, ?)", (login, hashed_password ))
     conn.commit()
     conn.close()
+
 def get_users():
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
@@ -224,6 +225,25 @@ def auth_user(login, password):
         return user[0]
     
     return -1
+
+def get_user_by_id(user_id):
+    conn = sqlite3.connect("shop.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM user WHERE id = ?", (user_id,))
+    user = cursor.fetchone()
+
+    conn.close()
+    if user:
+        return {
+            "id":user[0],
+            "login": user[1],
+            "password": user[2],
+            "type_user": user[3],
+        }
+    else:
+        return None
+
 
 if __name__ == "__main__":
     create_database()

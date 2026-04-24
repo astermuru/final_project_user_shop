@@ -24,6 +24,7 @@
         <tr>
             <th>Фото</th>
             <th>Название</th>
+            <th>Тип товара</th>
             <th>Описание</th>
             <th>Цена</th>
             <th>Количество</th>
@@ -34,6 +35,7 @@
                 <td>
                     <img src="{{ product.product_info.image }}" alt="" width="100">
                     <td>{{ product.product_info.name }}</td>
+                    <td>{{ product.product_info.type_products }}</td>
                     <td> {{ product.product_info.description }} </td>
                     <td>{{ product.product_info.price }}</td>
                     <td>

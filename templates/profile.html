@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{{ url_for('index') }}"><button>Главная</button></a>
+    <h1>Профиль</h1>
+    <h2>{{user.login}}</h2>
+    <h2>{{user.password}}</h2>
+    <h2>{{user.type_user}}</h2>
+</body>
+</html>
