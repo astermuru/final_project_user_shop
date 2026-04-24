@@ -7,6 +7,29 @@ def create_database():
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
 
+
+#Создание таблицы type_user
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Type_user (
+            id iNTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL
+
+        )
+    ''')
+    conn.commit()
+
+    cursor.execute('''
+        INSERT INTO Type_user (name) VALUES (?) 
+                   ''', ("user", ))
+    conn.commit()
+    cursor.execute('''
+        INSERT INTO Type_user (name) VALUES (?) 
+                   ''', ("admin", ))
+    conn.commit()
+    cursor.execute("INSERT INTO Type_user (name) VALUES (?)", ("super_admin", ) )
+    conn.commit()
+
+
      #Создание таблицы user
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS user (
@@ -74,26 +97,26 @@ def create_database():
                    ''', ("hobby", ))
     conn.commit()
 
-       #Создание таблицы type_user
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS Type_user (
-            id iNTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL
+    #    #Создание таблицы type_user
+    # cursor.execute('''
+    #     CREATE TABLE IF NOT EXISTS Type_user (
+    #         id iNTEGER PRIMARY KEY AUTOINCREMENT,
+    #         name TEXT NOT NULL
 
-        )
-    ''')
-    conn.commit()
+    #     )
+    # ''')
+    # conn.commit()
 
-    cursor.execute('''
-        INSERT INTO Type_user (name) VALUES (?) 
-                   ''', ("user", ))
-    conn.commit()
-    cursor.execute('''
-        INSERT INTO Type_user (name) VALUES (?) 
-                   ''', ("admin", ))
-    conn.commit()
-    cursor.execute("INSERT INTO Type_user (name) VALUES (?)", ("super_admin", ) )
-    conn.commit()
+    # cursor.execute('''
+    #     INSERT INTO Type_user (name) VALUES (?) 
+    #                ''', ("user", ))
+    # conn.commit()
+    # cursor.execute('''
+    #     INSERT INTO Type_user (name) VALUES (?) 
+    #                ''', ("admin", ))
+    # conn.commit()
+    # cursor.execute("INSERT INTO Type_user (name) VALUES (?)", ("super_admin", ) )
+    # conn.commit()
     
 
     cursor.execute('''
