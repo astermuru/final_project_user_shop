@@ -47,7 +47,7 @@ def product(product_id):
         type_user = session["type_user"]
     #user_type = "user"
     if product:
-        return render_template("product.html", product=product, type_user = type_user)
+        return render_template("product.html", product=product, type_user=type_user)
     else:
         return redirect(url_for('index'))
 
