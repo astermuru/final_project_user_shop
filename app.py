@@ -40,8 +40,14 @@ def add_product():
 @app.route("/product/<int:product_id>")
 def product(product_id):
     product = database.get_product_by_id(product_id)
+
+    if "type_user" not in session:
+        return redirect("login.html")
+    else:
+        type_user = session["type_user"]
+    #user_type = "user"
     if product:
-        return render_template("product.html", product=product)
+        return render_template("product.html", product=product, type_user = type_user)
     else:
         return redirect(url_for('index'))
 
@@ -116,6 +122,7 @@ def regster_page():
         login = request.form["login"]
         pass1 = request.form["pass1"]
         pass2 = request.form["pass2"]
+        type_user = request.form["type_user"]
         errors = []
 
         # проверка насуществующего пользвателя
@@ -133,7 +140,7 @@ def regster_page():
         # проверка на регистрацию
         if len(errors) == 0:
             # регистрация
-            database.add_user(login, pass1)
+            database.add_user(login, pass1, type_user)
             return render_template("success_register.html")
         else:
             print(errors)
@@ -152,12 +159,15 @@ def login_page():
     else:
         login = request.form["login"]
         password = request.form["password"]
-        user_id = database.auth_user(login,password)
+        type_user=request.form["type_user"]
+        user_id = database.auth_user(login, password)
 
         if user_id >= 0:
             print("Успешный вход")
             session["user_id"] =  user_id
             session["login"] = login
+            session["type_user"] = type_user
+            # add user_type
             return redirect(url_for("index"))
             
         else:

@@ -97,26 +97,7 @@ def create_database():
                    ''', ("hobby", ))
     conn.commit()
 
-    #    #Создание таблицы type_user
-    # cursor.execute('''
-    #     CREATE TABLE IF NOT EXISTS Type_user (
-    #         id iNTEGER PRIMARY KEY AUTOINCREMENT,
-    #         name TEXT NOT NULL
-
-    #     )
-    # ''')
-    # conn.commit()
-
-    # cursor.execute('''
-    #     INSERT INTO Type_user (name) VALUES (?) 
-    #                ''', ("user", ))
-    # conn.commit()
-    # cursor.execute('''
-    #     INSERT INTO Type_user (name) VALUES (?) 
-    #                ''', ("admin", ))
-    # conn.commit()
-    # cursor.execute("INSERT INTO Type_user (name) VALUES (?)", ("super_admin", ) )
-    # conn.commit()
+    
     
 
     cursor.execute('''
@@ -205,13 +186,13 @@ def validate_cart(cart):
     return cart
 
 # пользователь
-def add_user(login, password):
+def add_user(login, password, type_user):
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor() 
     hashed_password = generate_password_hash(password + SALT)
     
 
-    cursor.execute("INSERT INTO user (login, password) VALUES (?, ?)", (login, hashed_password ))
+    cursor.execute("INSERT INTO user (login, password, type_user) VALUES (?, ?, ?)", (login, hashed_password, type_user ))
     conn.commit()
     conn.close()
 
