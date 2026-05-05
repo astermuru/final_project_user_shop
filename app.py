@@ -39,7 +39,7 @@ def add_product():
     
 @app.route("/product/<int:product_id>")
 def product(product_id):
-    # product = database.get_product_by_id(product_id)
+    product = database.get_product_by_id(product_id)
     # if "type_user" in session:
     #     type_user = session["type_user"]
     # else:
