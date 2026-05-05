@@ -39,9 +39,13 @@ def add_product():
     
 @app.route("/product/<int:product_id>")
 def product(product_id):
-    product = database.get_product_by_id(product_id)
+    # product = database.get_product_by_id(product_id)
+    # if "type_user" in session:
+    #     type_user = session["type_user"]
+    # else:
+    #     type_user = None
 
-    if "type_user" not in session:
+    if  "type_user" not in session:
         return redirect("login.html")
     else:
         type_user = session["type_user"]
@@ -159,14 +163,14 @@ def login_page():
     else:
         login = request.form["login"]
         password = request.form["password"]
-        type_user=request.form["type_user"]
-        user_id = database.auth_user(login, password)
+        user = database.auth_user(login, password)
 
-        if user_id >= 0:
+        if user != {}:
             print("Успешный вход")
-            session["user_id"] =  user_id
-            session["login"] = login
-            session["type_user"] = type_user
+            session["user_id"] =  user["id"]
+            session["login"] = user["login"]
+            session["type_user"] = user["type_user"]
+            
             # add user_type
             return redirect(url_for("index"))
             
@@ -182,10 +186,13 @@ def logout():
 @app.route("/profile/<int:user_id>")
 def profile(user_id):
     user = database.get_user_by_id(user_id)
-    if user:
+    if "user" in session:
         return render_template("profile.html", user=user)
     else:
-        return redirect(url_for('index'))
+        return redirect(url_for('login.html'))
+    
+    
+    
 
 
     

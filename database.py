@@ -222,13 +222,16 @@ def auth_user(login, password):
     cursor.execute("SELECT * FROM user WHERE login=?", (login, ))
     user = cursor.fetchone() #(2, "admin", "sjgiigjaiihb")
     if not user:
-        return -1
+        return {}
 
     # 2. сравнить сгенерированный хеш с тем, что хранится
     if check_password_hash(user[2], password+SALT):
-        return user[0]
-    
-    return -1
+        return {
+            "id": user[0],
+            "login": user[1],
+            "type_user": user[3]
+        }
+    return None
 
 def get_user_by_id(user_id):
     conn = sqlite3.connect("shop.db")
