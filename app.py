@@ -14,7 +14,7 @@ def index():
     cart = session.get("cart", {})
     cart = database.validate_cart(cart)
     cart_count = len(cart)
-    return render_template("index.html", products=products, cart=cart, cart_count=cart_count)
+    return render_template("index.html", products=products, cart=cart, cart_count=cart_count, type_user=session.get("type_user"), user_id=session.get("user_id"))
 
 @app.route("/add_product", methods=["GET", "POST"])
 def add_product():
@@ -181,15 +181,23 @@ def login_page():
 @app.route("/logout")
 def logout():
     session.clear()
-    return redirect(url_for("login_page"))
+    return redirect(url_for("index"))
 
 @app.route("/profile/<int:user_id>")
 def profile(user_id):
     user = database.get_user_by_id(user_id)
-    if "user" in session:
-        return render_template("profile.html", user=user)
-    else:
-        return redirect(url_for('login.html'))
+    user_id =session["user_id"]
+    if "user_id" not in session:
+        return redirect(url_for('login_page'))
+    
+    return render_template("profile.html", user=user)
+
+@app.route("/register_or_login")
+def register_or_login():
+    return redirect(url_for('register_or_login'))
+    
+   
+    
     
     
     

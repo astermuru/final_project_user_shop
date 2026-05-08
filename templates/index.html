@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Онлайн магазин</h1>
-    <h2>Каталог товаров</h2>
+    
     <style>
         .cart-img{
             position: relative;
@@ -30,15 +30,31 @@
         }
 
     </style>
-    <div>
-        <a href="{{ url_for('add_product') }}"><button>Добавить товар</button></a>
-    </div>
-    <div>
+
+     {% if type_user == 2 or type_user == 3 %}
+        <div>
+            <a href="{{ url_for('add_product') }}"><button>Добавить товар</button></a>
+        </div>
+    {% endif %}
+
+    <!-- <div>
         <a href="{{ url_for('regster_page') }}"><button>Регистрация</button></a>
     </div>
     <div>
         <a href="{{ url_for('login_page') }}"><button>Войти</button></a>
-    </div>
+    </div> -->
+
+    {% if user_id in session %}
+        <div class="profile-img">
+            <a href="{{ url_for('profile', user_id=session['user_id']) }}">
+            <img src="{{ url_for('static', filename='img/profile_img.png') }}" alt="100">
+            </a>
+        </div>
+    {% else %}
+        <a href="{{ url_for('register_or_login') }}"><button>Профиль</button></a>
+    {% endif %}
+
+    <h2>Каталог товаров</h2>
 
     <div class="cart-img">
         <a href="{{ url_for('cart') }}">

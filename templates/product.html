@@ -12,7 +12,7 @@
     <p>{{product.description}}</p>
     <img src="../{{ product.image }}" width="200">
     <br><br>
-    <p>{{ type_user }}</p>
+    <!-- <p>{{ type_user }}</p> -->
     {% if type_user == 2 or type_user == 3 %}
         <form action="{{ url_for('delete_product', product_id=product.id)}}" method="POST">
             <button type="submit">Удалить товар</button>
