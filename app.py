@@ -194,7 +194,7 @@ def profile(user_id):
 
 @app.route("/register_or_login")
 def register_or_login():
-    return redirect(url_for('register_or_login'))
+    return redirect(url_for('index'))
     
    
     
