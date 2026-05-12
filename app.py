@@ -189,12 +189,12 @@ def profile(user_id):
     user_id =session["user_id"]
     if "user_id" not in session:
         return redirect(url_for('login_page'))
-    
-    return render_template("profile.html", user=user)
+    else:
+        return render_template("profile.html", user=user)
 
 @app.route("/register_or_login")
 def register_or_login():
-    return redirect(url_for('index'))
+    return render_template('register_or_login.html')
     
    
     

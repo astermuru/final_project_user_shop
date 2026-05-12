@@ -134,7 +134,8 @@ def get_products():
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
         
-    cursor.execute("SELECT * FROM products")
+    cursor.execute("""SELECT products.id, products.name, products.price, Type_products.name, products.description, products.image FROM products 
+                   JOIN Type_products ON products.type_products = Type_products.id""")
     products = cursor.fetchall()
 
     conn.close()
