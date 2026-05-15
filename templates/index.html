@@ -65,6 +65,24 @@
         <img src="{{ url_for('static', filename='img/basket.png') }}" alt="" width="100">
         </a>
     </div>
+
+    <form method="GET">
+         <select name="type_products" id="">
+            <option value="all" {% if cur_type == "all" %}selected{% endif %}>все</option>
+            <option value="1" {% if cur_type == "1" %}selected{% endif %}>электроника</option>
+            <option value="2" {% if cur_type == "2" %}selected{% endif %}>продовольственные товары</option>
+            <option value="3" {% if cur_type == "3" %}selected{% endif %}>одежда</option>
+            <option value="4" {% if cur_type == "4" %}selected{% endif %}>обувь</option>
+            <option value="5" {% if cur_type == "5" %}selected{% endif %}>детские товары</option>
+            <option value="6" {% if cur_type == "6" %}selected{% endif %}>уходовая косметика</option>
+            <option value="7" {% if cur_type == "7" %}selected{% endif %}>зоотовары</option>
+            <option value="8" {% if cur_type == "8" %}selected{% endif %}>строительство и ремонт</option>
+            <option value="9" {% if cur_type == "9" %}selected{% endif %}>аптека</option>
+            <option value="10" {% if cur_type == "10" %}selected{% endif %}>аксессуары</option>
+            <option value="11" {% if cur_type == "11" %}selected{% endif %}>хобби</option>
+        </select>
+        <button>Применить</button>
+    </form>
     
     
     <div class="products">

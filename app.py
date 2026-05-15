@@ -7,14 +7,26 @@ app = Flask(__name__)
 app.secret_key = "alsirgj55siiehgh"
 UPLOAD_FOLDER = "static/aploads"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+secret_key_user = "lolemo555999"
 
 @app.route("/")
 def index():
     products = database.get_products()
+    type_products = database.get_all_type_products()
+    selected_type = request.args.get("type_products")
+    cur_type = request.args.get("type_products")
     cart = session.get("cart", {})
     cart = database.validate_cart(cart)
     cart_count = len(cart)
-    return render_template("index.html", products=products, cart=cart, cart_count=cart_count, type_user=session.get("type_user"), user_id=session.get("user_id"))
+
+    if selected_type == "all" or selected_type == None:
+        products = database.get_products()
+    else:
+        products = database.get_type_products(selected_type)
+
+    print(selected_type)
+    return render_template("index.html", products=products, type_products=type_products, cart=cart, cart_count=cart_count, type_user=session.get("type_user"), user_id=session.get("user_id"), cur_type=cur_type)
+    
 
 @app.route("/add_product", methods=["GET", "POST"])
 def add_product():
@@ -127,6 +139,13 @@ def regster_page():
         pass1 = request.form["pass1"]
         pass2 = request.form["pass2"]
         type_user = request.form["type_user"]
+        key = request.form["key"]
+        if type_user == 3:
+            if key == secret_key_user:
+                database.add_user(login, pass1, type_user)
+                return render_template("success_register.html")
+            else:
+                errors.append("А нельзя так")
         errors = []
 
         # проверка насуществующего пользвателя

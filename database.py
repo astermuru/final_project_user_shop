@@ -141,6 +141,28 @@ def get_products():
     conn.close()
     return products
 
+def get_type_products(type_products):
+    conn = sqlite3.connect("shop.db")
+    cursor = conn.cursor()
+        
+    cursor.execute("""SELECT * FROM products WHERE type_products = ? """, (type_products, ))
+    
+    products = cursor.fetchall()
+
+    conn.close()
+    return products
+
+def get_all_type_products():
+    conn = sqlite3.connect("shop.db")
+    cursor = conn.cursor()
+        
+    cursor.execute("""SELECT * FROM Type_products """)
+    
+    products = cursor.fetchall()
+
+    conn.close()
+    return products
+
 def get_product_by_id(product_id):
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
