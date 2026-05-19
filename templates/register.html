@@ -23,15 +23,18 @@
             <label for="">Потверждение пароля:</label>
             <input type="password" name="pass2">
         </div>
-        <select name="type_user" id="">
+        <select name="type_user" id="type_user">
             <option value="1">пользователь</option>
             <option value="2">админ(продавец)</option>
             <option value="3">супер администратор</option>
         </select>
-        <div>
+
+        
+        <div id="secret_key_div" style="display:none;">
             <label for="">Секретный ключ:</label>
             <input type="password" name="key">
         </div>
+       
         <div>
             <input type="submit" value="Регистрация">
         </div>
@@ -42,5 +45,19 @@
         <p>{{ error }}</p>
         {% endfor %}
     </div>
+
+    <script>
+        const select = document.getElementById("type_user")
+        const secretDiv = document.getElementById("secret_key_div")
+        select.addEventListener("change", function() {
+            if(select.value == "3") {
+                secretDiv.style.display = "block"
+            }
+            else {
+                secretDiv.style.display = "none"
+            }
+        })
+    </script>
+
 </body>
 </html
