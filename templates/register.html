@@ -4,60 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/register-style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/register-style.css')}}"> -->
 </head>
 </head>
 <body>
-    <h1>Регистрация</h1>
-    <form action="/register" method="POST">
-        <div>
-            <label for="">Логин:</label>
-            <input type="text" name="login">
-        </div>
-        
-        <div>
-            <label for="">Пароль:</label>
-            <input type="password" name="pass1">
-        </div>
-        <div>
-            <label for="">Потверждение пароля:</label>
-            <input type="password" name="pass2">
-        </div>
-        <select name="type_user" id="type_user">
-            <option value="1">пользователь</option>
-            <option value="2">админ(продавец)</option>
-            <option value="3">супер администратор</option>
-        </select>
+    {% include '_navbar.html' %}
+    <div class="container">
+        <h1>Регистрация</h1>
+        <form action="/register" method="POST">
+            <div>
+                <label for="">Логин:</label>
+                <input type="text" name="login">
+            </div>
+            
+            <div>
+                <label for="">Пароль:</label>
+                <input type="password" name="pass1">
+            </div>
+            <div>
+                <label for="">Потверждение пароля:</label>
+                <input type="password" name="pass2">
+            </div>
+            <select name="type_user" id="type_user">
+                <option value="1">пользователь</option>
+                <option value="2">админ(продавец)</option>
+                <option value="3">супер администратор</option>
+            </select>
 
+            
+            <div id="secret_key_div" style="display:none;">
+                <label for="">Секретный ключ:</label>
+                <input type="password" name="key">
+            </div>
         
-        <div id="secret_key_div" style="display:none;">
-            <label for="">Секретный ключ:</label>
-            <input type="password" name="key">
-        </div>
-       
-        <div>
-            <input type="submit" value="Регистрация">
-        </div>
-    </form>
+            <div>
+                <input type="submit" value="Регистрация">
+            </div>
+        </form>
 
-    <div class="errors">
-        {% for error in errors %}
-        <p>{{ error }}</p>
-        {% endfor %}
+        <div class="errors">
+            {% for error in errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <script>
+            const select = document.getElementById("type_user")
+            const secretDiv = document.getElementById("secret_key_div")
+            select.addEventListener("change", function() {
+                if(select.value == "3") {
+                    secretDiv.style.display = "block"
+                }
+                else {
+                    secretDiv.style.display = "none"
+                }
+            })
+        </script>
     </div>
-
-    <script>
-        const select = document.getElementById("type_user")
-        const secretDiv = document.getElementById("secret_key_div")
-        select.addEventListener("change", function() {
-            if(select.value == "3") {
-                secretDiv.style.display = "block"
-            }
-            else {
-                secretDiv.style.display = "none"
-            }
-        })
-    </script>
-
 </body>
 </html

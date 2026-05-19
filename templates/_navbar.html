@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar">
+    <div class="container">
+        <a href="/" class="logo">Цифровой <span>Маркет</span></a>
+        <div class="nav-links">
+            <a href="/">Главная</a>
+            <div class="cart-img">
+                <a href="{{ url_for('cart') }}">
+                <img src="{{ url_for('static', filename='img/basket.png') }}" alt="" width="50">
+                </a>
+            </div>
+            {% if "user_id" in session %}
+            <div class="profile-img">
+                <a href="{{ url_for('profile', user_id=session['user_id']) }}">
+                <img src="{{ url_for('static', filename='img/profile_img.png') }}" alt="" width="120">
+                </a>
+            </div>
+            {% else %}
+                <div class="profile-img">
+                    <a href="{{ url_for('register_or_login') }}">
+                    <img src="{{ url_for('static', filename='img/profile_img.png') }}" alt="" width="120"> 
+                    </a>
+                </div>
+            {% endif %}
+            </div>
+    </div>
+</nav>
+</body>
+</html>

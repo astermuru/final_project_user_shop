@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/register-style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/register-style.css')}}"> -->
 </head>
 <body>
-    <a href="{{ url_for('regster_page') }}"><button>Регистрация</button></a>
-    <a href="{{ url_for('login_page') }}"><button>Вход</button></a>
+    {% include '_navbar.html' %}
+    <div class="container">
+        <h1>Зайди в профиль!</h1>
+        
+
+
+        <a href="{{ url_for('regster_page') }}"><button class="btn btn-block">Регистрация</button></a>
+        <a href="{{ url_for('login_page') }}"><button class="btn btn-block">Вход</button></a>
+    </div>
 </body>
 </html>

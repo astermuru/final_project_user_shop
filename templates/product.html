@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <a href="{{ url_for('index') }}"><button>Главная</button></a>
-    <h1>{{product.name}}</h1>
-    <h2>Цена: {{product.price}} руб.</h2>
-    <p>{{product.description}}</p>
-    <img src="../{{ product.image }}" width="200">
-    <br><br>
-    <!-- <p>{{ type_user }}</p> -->
-    {% if type_user == 2 or type_user == 3 %}
-        <form action="{{ url_for('delete_product', product_id=product.id)}}" method="POST">
-            <button type="submit">Удалить товар</button>
-        </form>
-    {% endif %}
+    {% include '_navbar.html' %}
+    <div class="container">
+        <a href="{{ url_for('index') }}"><button>Главная</button></a>
+        <h1>{{product.name}}</h1>
+        <h2>Цена: {{product.price}} руб.</h2>
+        <p>{{product.description}}</p>
+        <img src="../{{ product.image }}" width="200">
+        <br><br>
+        <!-- <p>{{ type_user }}</p> -->
+        {% if type_user == 2 or type_user == 3 %}
+            <form action="{{ url_for('delete_product', product_id=product.id)}}" method="POST">
+                <button type="submit" class="btn btn-danger">Удалить товар</button>
+            </form>
+        {% endif %}
+    </div>
 
 </body>
 </html>

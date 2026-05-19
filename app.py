@@ -214,8 +214,13 @@ def register_or_login():
     return render_template('register_or_login.html')
     
    
-    
-    
+@app.context_processor
+def utility_processor():
+    def get_cart_count():
+        cart = session.get("cart", {})
+        cart = database.validate_cart(cart)
+        return len(cart)
+    return dict(cart_count=get_cart_count())
     
     
 
