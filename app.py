@@ -140,13 +140,11 @@ def regster_page():
         pass2 = request.form["pass2"]
         type_user = request.form["type_user"]
         key = request.form["key"]
-        if type_user == 3:
-            if key == secret_key_user:
-                database.add_user(login, pass1, type_user)
-                return render_template("success_register.html")
-            else:
-                errors.append("А нельзя так")
         errors = []
+
+        if type_user == "3":
+            if key != secret_key_user:
+              errors.append("А нельзя так! Неверный ключ.")
 
         # проверка насуществующего пользвателя
         if database.check_user_exists(login):
