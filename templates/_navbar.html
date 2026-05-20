@@ -10,7 +10,7 @@
     <div class="container">
         <a href="/" class="logo">Цифровой <span>Маркет</span></a>
         <div class="nav-links">
-            <a href="/">Главная</a>
+            <a href="/" class="logo">Главная</a>
             <div class="cart-img">
                 <a href="{{ url_for('cart') }}">
                 <img src="{{ url_for('static', filename='img/basket.png') }}" alt="" width="50">
@@ -19,13 +19,13 @@
             {% if "user_id" in session %}
             <div class="profile-img">
                 <a href="{{ url_for('profile', user_id=session['user_id']) }}">
-                <img src="{{ url_for('static', filename='img/profile_img.png') }}" alt="" width="120">
+                <img src="{{ url_for('static', filename='img/profile_with_hat.png') }}" alt="" width="70">
                 </a>
             </div>
             {% else %}
                 <div class="profile-img">
                     <a href="{{ url_for('register_or_login') }}">
-                    <img src="{{ url_for('static', filename='img/profile_img.png') }}" alt="" width="120"> 
+                    <img src="{{ url_for('static', filename='img/profile_without_hat.png') }}" alt="" width="70"> 
                     </a>
                 </div>
             {% endif %}

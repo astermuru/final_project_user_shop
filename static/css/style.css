@@ -66,7 +66,7 @@ body {
 }
 
 .logo span {
-    color: #f72585;
+    color: #0a1170;
 }
 
 .nav-links {
@@ -202,7 +202,7 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
     background: white;
-    color: #4361ee;
+    color: #121c46;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
@@ -219,8 +219,8 @@ body {
 /* Кнопка "В корзину" – белая с синей рамкой */
 .btn-outline {
     background: white;
-    border: 2px solid #4361ee;
-    color: #4361ee;
+    border: 2px solid #121c46;
+    color: #121c46;
     box-shadow: none;
 }
 
@@ -233,15 +233,15 @@ body {
 /* Кнопка удаления – белая с красной рамкой и красным текстом */
 .btn-danger {
     background: white;
-    border: 2px solid #e63946;
-    color: #e63946;
+    border: 2px solid #971a27;
+    color: #971a27;
     box-shadow: none;
 }
 
 .btn-danger:hover {
-    background: #e63946;
-    color: white;
-    border-color: #e63946;
+    background: #ffffff;
+    color: #971a27;
+    border-color: #971a27;
 }
 
 /* Маленькие кнопки (для количества в корзине) */

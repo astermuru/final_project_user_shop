@@ -52,6 +52,7 @@ def add_product():
 @app.route("/product/<int:product_id>")
 def product(product_id):
     product = database.get_product_by_id(product_id)
+    
     # if "type_user" in session:
     #     type_user = session["type_user"]
     # else:
@@ -63,7 +64,7 @@ def product(product_id):
         type_user = session["type_user"]
     #user_type = "user"
     if product:
-        return render_template("product.html", product=product, type_user=type_user)
+        return render_template("product.html", product=product, type_user=type_user )
     else:
         return redirect(url_for('index'))
 

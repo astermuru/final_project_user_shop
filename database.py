@@ -167,8 +167,10 @@ def get_product_by_id(product_id):
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM products WHERE id = ?", (product_id,))
+    cursor.execute("""SELECT products.id, products.name, products.price, Type_products.name, products.description, products.image FROM products 
+                   JOIN Type_products ON products.type_products = Type_products.id WHERE products.id = ?""", (product_id,))
     product = cursor.fetchone()
+    
 
     conn.close()
     if product:

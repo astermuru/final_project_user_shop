@@ -21,7 +21,7 @@
         {% elif user.type_user == 3 %}
             <h2>Статус: </h2><p>Суперадминистратор({{user.type_user}})</p>
         {% endif %}
-        <a href="{{ url_for('logout') }}"><button>Выйти</button></a>
+        <a href="{{ url_for('logout') }}"><button class="btn btn-outline">Выйти</button></a>
     </div>
 </body>
 </html>
