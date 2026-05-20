@@ -9,9 +9,9 @@
 <body>
     {% include '_navbar.html' %}
     <div class="container">
-        <h1>{{ product }}</h1>
-        <h1>{{product.name}}</h1>
-        <h1>{{ product[3] }}</h1>
+
+        <h1>Название: {{product.name}}</h1>
+        <h1>Тип: {{ product.type_products }}</h1>
         <h2>Цена: {{product.price}} руб.</h2>
         <p>Описание: {{product.description}}</p>
         <img src="../{{ product.image }}" width="200">
