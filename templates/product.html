@@ -8,20 +8,22 @@
 </head>
 <body>
     {% include '_navbar.html' %}
-    <div class="container">
-
-        <h1>Название: {{product.name}}</h1>
-        <h1>Тип: {{ product.type_products }}</h1>
-        <h2>Цена: {{product.price}} руб.</h2>
-        <p>Описание: {{product.description}}</p>
-        <img src="../{{ product.image }}" width="200">
-        <br><br>
-        <!-- <p>{{ type_user }}</p> -->
-        {% if type_user == 2 or type_user == 3 %}
-            <form action="{{ url_for('delete_product', product_id=product.id)}}" method="POST">
-                <button type="submit" class="btn btn-danger">Удалить товар</button>
-            </form>
-        {% endif %}
+    <div class="product-detail">
+        <img src="../{{ product.image }}" width="200" class="product-detail-image">
+        <div class="product-detail-content">
+            <h1  class="product-detail-title">Название: {{product.name}}</h1>
+            <div class="product-detail-category">Тип: {{ product.type_products }}</div>
+            <div class="product-detail-price">Цена: {{product.price}} руб.</div>
+            <div class="product-detail-description">Описание: {{product.description}}</div>
+            
+            <br><br>
+            <!-- <p>{{ type_user }}</p> -->
+            {% if type_user == 2 or type_user == 3 %}
+                <form action="{{ url_for('delete_product', product_id=product.id)}}" method="POST">
+                    <button type="submit" class="btn btn-danger">Удалить товар</button>
+                </form>
+            {% endif %}
+        </div>
     </div>
 
 </body>

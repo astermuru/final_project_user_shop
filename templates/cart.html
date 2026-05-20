@@ -8,9 +8,9 @@
 </head>
 <body>
     {% include '_navbar.html' %}
-    <div class="container">
+    <div class="cart-table">
         <h1>Корзина</h1>
-        <style>
+        <!-- <style>
             table{
                 border-collapse: collapse;
                 border: 2px solid rgb(140, 140, 140);
@@ -22,7 +22,7 @@
                 border: 2px solid rgb(140, 140, 140);
                 padding: 8px 10px;
             }
-        </style>
+        </style> -->
         <table>
             <tr>
                 <th>Фото</th>
@@ -57,10 +57,15 @@
                     </td>
                 </tr>
                 {% endfor %}
-                <tr>
-                    <td colspan="4">Итого:</td>
-                    <td>{{ cart_summa }}</td>
-                </tr>
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5" style="text-align: right; font-weight: bold;">Итого:</td>
+                        <td style="font-weight: bold; color: #e74c3c;">{{ cart_summa }} ₽</td>
+                    </tr>
+                </tfoot>
+                
         </table>
         
     </div>

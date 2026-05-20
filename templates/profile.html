@@ -10,18 +10,57 @@
 </head>
 <body>
     {% include '_navbar.html' %}
-    <div class="container">
+    
+
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <img src="{{ url_for('static', filename='img/profile_with_hat.png') }}" alt="" width="70">
+            </div>
+            <h2 class="profile-name">{{ user.login }}</h2>
+            <div class="profile-role">
+                {% if user.type_user == 1 %}
+                    <h2> </h2><p>Пользователь</p>
+                {% elif user.type_user == 2 %}
+                   <h2> </h2><p>Админ(продавец)</p>
+                {% else %}
+                    <h2> </h2><p>Суперадминистратор</p>
+                {% endif %}
+            </div>
+        </div>
         
-        <h1>Профиль</h1>
-        <h2>Логин: </h2><p>{{user.login}}</p>
-        {% if user.type_user == 1 %}
-            <h2>Статус: </h2><p>Пользователь({{user.type_user}})</p>
-        {% elif user.type_user == 2 %}
-            <h2>Статус: </h2><p>Админ(продавец)({{user.type_user}})</p>
-        {% elif user.type_user == 3 %}
-            <h2>Статус: </h2><p>Суперадминистратор({{user.type_user}})</p>
-        {% endif %}
-        <a href="{{ url_for('logout') }}"><button class="btn btn-outline">Выйти</button></a>
+        <div class="profile-content">
+            <div class="profile-info-item">
+                <span class="label">Логин:</span>
+                <span class="value">{{ user.login }}</span>
+            </div>
+            
+            <div class="profile-info-item">
+                <span class="label">ID:</span>
+                <span class="value">{{ user.id }}</span>
+            </div>
+            
+            <div class="profile-info-item">
+                <span class="label">Статус:</span>
+                <span class="value">
+                    {% if user.type_user == 1 %}
+                        Обычный пользователь
+                    {% elif user.type_user == 2 %}
+                        Администратор
+                    {% else %}
+                        Суперадминистратор
+                    {% endif %}
+                </span>
+            </div>
+            
+            
+            
+            <div class="profile-buttons">
+                <a href="{{ url_for('index') }}" class="btn btn-outline">На главную</a>
+                <a href="{{ url_for('logout') }}" class="btn btn-danger">Выйти</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>

@@ -8,46 +8,60 @@
 </head>
 <body>
     {% include '_navbar.html' %}
-    <div class="container">
-        <h1>добавление товара</h1>
+    <div class="add-product-container">
+        <h1>Добавление товара</h1>
         <form action="/add_product" method="POST" enctype="multipart/form-data">
-            <label for="name">Название:</label><br>
-            <input type="text" id="name" name="name" required><br><br>
+            <div class="form-group">
+                <label for="name">Название:</label><br>
+                <input type="text" id="name" name="name" required>
+            </div>
 
-            <label for="price">Цена:</label><br>
-            <input type="number" id="price" name="price" required><br><br>
+            <div class="form-group">
+                <label for="price">Цена:</label><br>
+                <input type="number" id="price" name="price" required><br><br>
+            </div>
 
-            <div>
-            <!--выпадающее меню-->
-            <select name="type_products" id="">
-                <option value="1">электроника</option>
-                <option value="2">продовольственные товары</option>
-                <option value="3">одежда</option>
-                <option value="4">обувь</option>
-                <option value="5">детские товары</option>
-                <option value="6">уходовая косметика</option>
-                <option value="7">зоотовары</option>
-                <option value="8">строительство и ремонт</option>
-                <option value="9">аптека</option>
-                <option value="10">аксессуары</option>
-                <option value="11">хобби</option>
+            <div class="form-group">
+                <!--выпадающее меню-->
+                <select name="type_products" id="">
+                    <option value="1">электроника</option>
+                    <option value="2">продовольственные товары</option>
+                    <option value="3">одежда</option>
+                    <option value="4">обувь</option>
+                    <option value="5">детские товары</option>
+                    <option value="6">уходовая косметика</option>
+                    <option value="7">зоотовары</option>
+                    <option value="8">строительство и ремонт</option>
+                    <option value="9">аптека</option>
+                    <option value="10">аксессуары</option>
+                    <option value="11">хобби</option>
 
 
-            </select>
-        </div>
+                </select>
+            </div>
+        
+            <div class="form-group">
+                <label for="description">Описание:</label><br>
+                <textarea id="description" name="description" required></textarea><br><br>
+            </div>
 
-            <label for="description">Описание:</label><br>
-            <textarea id="description" name="description" required></textarea><br><br>
-
-            <label for="image">Изображение:</label><br>
-            <input type="file" id="image" name="image" required>
-            
-            <br><br>
-            
+            <div class="form-group">
+                <label for="image">Изображение:</label><br>
+                <button type="button" class="btn btn-outline" onclick="document.getElementById('image').click()">Выберите файл</button>
+                
+                <input type="file" id="image" name="image" required style="display: none;">
+                <span class="file-name" id="fileName">Файл не выбран</span>
+            </div>
 
             <input type="submit" value="Добавить товар"  class="btn btn-outline">
         </form>
     </div>
+
+    <script>
+    document.getElementById('image').onchange = function() {
+        document.getElementById('fileName').innerText = this.files[0]?.name || "Файл не выбран";
+    }
+    </script>
 </body>
 </html>
 <div>

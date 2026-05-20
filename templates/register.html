@@ -10,36 +10,40 @@
 </head>
 <body>
     {% include '_navbar.html' %}
-    <div class="container">
+    <div class="auth-container">
         <h1>Регистрация</h1>
-        <form action="/register" method="POST">
-            <div>
+        <form action="/register" method="POST" novalidate>
+            <div class="form-group">
                 <label for="">Логин:</label>
-                <input type="text" name="login">
+                <input type="text" name="login"  required class="form-input">
             </div>
             
-            <div>
+            <div class="form-group">
                 <label for="">Пароль:</label>
-                <input type="password" name="pass1">
+                <input type="password" name="pass1" required class="form-input">
             </div>
-            <div>
-                <label for="">Потверждение пароля:</label>
-                <input type="password" name="pass2">
-            </div>
-            <select name="type_user" id="type_user">
-                <option value="1">пользователь</option>
-                <option value="2">админ(продавец)</option>
-                <option value="3">супер администратор</option>
-            </select>
 
+            <div class="form-group">
+                <label for="">Потверждение пароля:</label>
+                <input type="password" name="pass2" required class="form-input">
+            </div>
+
+            <div class="form-group">
+                <label for="">Тип пользователя: </label>
+                <select name="type_user" id="type_user">
+                    <option value="1">пользователь</option>
+                    <option value="2">админ(продавец)</option>
+                    <option value="3">супер администратор</option>
+                </select>
+            </div>
             
             <div id="secret_key_div" style="display:none;">
                 <label for="">Секретный ключ:</label>
-                <input type="password" name="key">
+                <input type="password" name="key" class="form-input">
             </div>
         
             <div>
-                <input type="submit" value="Регистрация">
+                <button type="submit" class="btn">Регистрация</button>
             </div>
         </form>
 
