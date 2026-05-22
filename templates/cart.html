@@ -39,7 +39,7 @@
                         <img src="{{ product.product_info.image }}" alt="" width="100">
                         <td>{{ product.product_info.name }}</td>
                         <td>{{ product.product_info.type_products }}</td>
-                        <td> {{ product.product_info.description }} </td>
+                        <td class="product-description"> {{ product.product_info.description }} </td>
                         <td>{{ product.product_info.price }}</td>
                         <td>
                             <form action="{{ url_for('change_cart_product_amount')}}" method="POST">

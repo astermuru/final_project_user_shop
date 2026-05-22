@@ -615,7 +615,7 @@ body {
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -640,7 +640,7 @@ body {
 }
 
 .cart-table tr:hover {
-    background: #f8f9ff;
+    background: #ebeefd;
 }
 
 .cart-product-img {
@@ -766,6 +766,14 @@ body {
     
 }
 
+.product-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
 
 
 @media (max-width: 768px) {
