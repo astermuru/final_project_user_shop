@@ -106,8 +106,10 @@ def create_database():
                    name TEXT NOT NULL,
                    price REAL NOT NULL,
                    type_products INTEGER,
+                   user_id INTEGER,
                    description TEXT DEFAULT "",
                    image TEXT DEFAULT "",
+                   FOREIGN KEY (user_id) REFERENCES user(id),
                    FOREIGN KEY (type_products) REFERENCES Type_products(id)
     
             )
@@ -117,16 +119,16 @@ def create_database():
     conn.commit()
     conn.close()
 
-def add_product(name, price,  type_products, description="", image="", ):
+def add_product(name, price,  type_products, user_id, description="", image="", ):
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
 
     cursor.execute('''
                    INSERT INTO products
-                   (name, price, type_products, description, image)
-                   VALUES(?,?,?,?,?)
+                   (name, price, type_products, user_id, description, image)
+                   VALUES(?,?,?,?,?,?)
                    
-                   ''', (name, price, type_products, description, image))
+                   ''', (name, price, type_products, user_id, description, image))
     conn.commit()
     conn.close()
 
@@ -134,8 +136,8 @@ def get_products():
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
         
-    cursor.execute("""SELECT products.id, products.name, products.price, Type_products.name, products.description, products.image FROM products 
-                   JOIN Type_products ON products.type_products = Type_products.id""")
+    cursor.execute("""SELECT products.id, products.name, products.price, Type_products.name, user.id, products.description, products.image FROM products 
+                   JOIN Type_products ON products.type_products = Type_products.id JOIN user ON products.user_id = user.id""")
     products = cursor.fetchall()
 
     conn.close()
@@ -167,8 +169,8 @@ def get_product_by_id(product_id):
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
 
-    cursor.execute("""SELECT products.id, products.name, products.price, Type_products.name, products.description, products.image FROM products 
-                   JOIN Type_products ON products.type_products = Type_products.id WHERE products.id = ?""", (product_id,))
+    cursor.execute("""SELECT products.id, products.name, products.price, Type_products.name, user.id, products.description, products.image FROM products 
+                   JOIN Type_products ON products.type_products = Type_products.id JOIN user ON products.user_id = user.id WHERE products.id = ? """, (product_id,))
     product = cursor.fetchone()
     
 
@@ -179,8 +181,9 @@ def get_product_by_id(product_id):
             "name": product[1],
             "price": product[2],
             "type_products": product[3],
-            "description": product[4],
-            "image": product[5],
+            "user_id": product[4],
+            "description": product[5],
+            "image": product[6],
         }
     else:
         return None
@@ -191,7 +194,7 @@ def delete_product(product_id):
     
     cursor.execute("SELECT * FROM products WHERE id = ?", (product_id,))
     product = cursor.fetchone()
-    image_path = product[4]
+    image_path = product[6]
     if os.path.exists(image_path):
         os.remove(image_path)
 
@@ -214,7 +217,7 @@ def validate_cart(cart):
 def add_user(login, password, type_user):
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor() 
-    hashed_password = generate_password_hash(password + SALT)
+    hashed_password = generate_password_hash(password)
     
 
     cursor.execute("INSERT INTO user (login, password, type_user) VALUES (?, ?, ?)", (login, hashed_password, type_user ))
@@ -251,7 +254,7 @@ def auth_user(login, password):
         return None
 
     # 2. сравнить сгенерированный хеш с тем, что хранится
-    if check_password_hash(user[2], password+SALT):
+    if check_password_hash(user[2], password):
         return {
             "id": user[0],
             "login": user[1],
