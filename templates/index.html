@@ -42,6 +42,12 @@
             </div>
         {% endif %}
 
+        {% if type_user == 3 %}
+            <div>
+                <a href="{{ url_for('admin_users') }}"><button class="btn">Администрация</button></a>
+            </div>
+        {% endif %}
+
     
 
             <div class="index-layout">
@@ -83,8 +89,8 @@
                                     <p>{{ product[3] }}</p>
                                     <p>Цена: {{ product[2] }} руб.</p>
                                     <p class="product-description">Описание: {{ product[4] }}</p>
-                                    {% if product[5] %}
-                                        <img src="{{ product[5] }}" width="200">
+                                    {% if product[6] %}
+                                        <img src="{{ product[6] }}" width="200">
                                     {% endif %}
                                     <a href="{{ url_for('product', product_id=product[0]) }}"><button class="btn">Подробнее</button></a>
                                     <a href="{{ url_for('add_to_cart', product_id=product[0]) }}"><button class="btn">Добавить в корзину</button></a>
