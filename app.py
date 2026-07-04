@@ -72,7 +72,7 @@ def product(product_id):
 
 @app.route("/delete_product/<int:product_id>", methods=["POST"])
 def delete_product(product_id):
-    product = database.get_products(product_id)
+    product = database.get_products()
 
     if not product:
         return redirect(url_for("index"))
@@ -80,7 +80,7 @@ def delete_product(product_id):
     user_id = session["user_id"]
     type_user = session["type_user"]
 
-    if product["user_id"] == user_id or type_user == "super_admin":
+    if product[4] == user_id or type_user == "super_admin":
         database.delete_product(product_id)
     
     return redirect(url_for('index'))
