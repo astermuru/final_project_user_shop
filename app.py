@@ -72,7 +72,7 @@ def product(product_id):
 
 @app.route("/delete_product/<int:product_id>", methods=["POST"])
 def delete_product(product_id):
-    product = database.get_products()
+    product = database.get_product_by_id(product_id)
 
     if not product:
         return redirect(url_for("index"))
@@ -80,7 +80,7 @@ def delete_product(product_id):
     user_id = session["user_id"]
     type_user = session["type_user"]
 
-    if product[4] == user_id or type_user == "super_admin":
+    if product["user_id"] == user_id or type_user == "super_admin":
         database.delete_product(product_id)
     
     return redirect(url_for('index'))
@@ -235,9 +235,34 @@ def utility_processor():
     return dict(cart_count=get_cart_count())
     
     
+@app.route("/super_admin/users")
+def admin_users():
 
+    type_user = session.get("type_user")
 
+    if type_user != 3:
+        return "Нет доступа"
     
+    users = database.get_users()
+    return render_template("super_admin_users.html", users = users)
+
+@app.route("/super_admin/delete_user/<int:user_id>", methods=["POST"])
+def delete_user(user_id):
+
+    type_user = session.get("type_user")
+
+    if type_user != 3:
+        return "Нет доступа"
+    
+    user = database.get_user_by_id(user_id)
+
+    # удаляем товары
+    if user["type_user"] == "super_admin":
+        database.delete_products_by_user(user_id)
+    # удаляем пользователя
+    database.delete_user(user_id)
+
+    return redirect(url_for("admin_users"))
 
 if __name__ == "__main__":
     app.run(debug=True)
