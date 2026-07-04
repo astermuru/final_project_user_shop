@@ -183,7 +183,7 @@ def login_page():
         password = request.form["password"]
         user = database.auth_user(login, password)
 
-        if user != {}:
+        if user:
             print("Успешный вход")
             session["user_id"] =  user["id"]
             session["login"] = user["login"]
