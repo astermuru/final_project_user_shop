@@ -136,7 +136,7 @@ def get_products():
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
         
-    cursor.execute("""SELECT products.id, products.name, products.price, Type_products.name, user.id, products.description, products.image FROM products 
+    cursor.execute("""SELECT products.id, products.name, products.price, Type_products.name,  products.user_id, products.description, products.image FROM products 
                    JOIN Type_products ON products.type_products = Type_products.id JOIN user ON products.user_id = user.id""")
     products = cursor.fetchall()
 
@@ -169,7 +169,7 @@ def get_product_by_id(product_id):
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
 
-    cursor.execute("""SELECT products.id, products.name, products.price, Type_products.name, user.id, products.description, products.image FROM products 
+    cursor.execute("""SELECT products.id, products.name, products.price, Type_products.name, products.user_id, products.description, products.image FROM products 
                    JOIN Type_products ON products.type_products = Type_products.id JOIN user ON products.user_id = user.id WHERE products.id = ? """, (product_id,))
     product = cursor.fetchone()
     
@@ -280,6 +280,23 @@ def get_user_by_id(user_id):
     else:
         return None
 
+def delete_user(user_id):
+    conn = sqlite3.connect("shop.db")
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM user WHERE id = ? ", (user_id,))
+
+    conn.commit()
+    conn.close()
+
+def delete_products_by_user(user_id):
+    conn = sqlite3.connect("shop.db")
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM products WHERE user_id = ?", (user_id))
+
+    conn.commit()
+    conn.close()
 
 if __name__ == "__main__":
     create_database()
