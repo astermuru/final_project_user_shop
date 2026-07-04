@@ -43,8 +43,10 @@ def add_product():
         image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         image.save(image_path)
 
+        #берем ID пользователя
+        user_id = session["user_id"]
         #создать запись в БД
-        database.add_product(name, price, type_products, description, image_path)
+        database.add_product(name, price, type_products, user_id, description, image_path)
         return redirect(url_for('index'))
     else:
         return render_template("add_product.html")
@@ -58,8 +60,8 @@ def product(product_id):
     # else:
     #     type_user = None
 
-    if  "type_user" not in session:
-        return redirect("login.html")
+    if  "user_id" not in session:
+        return redirect(url_for("login_page"))
     else:
         type_user = session["type_user"]
     #user_type = "user"
@@ -70,8 +72,17 @@ def product(product_id):
 
 @app.route("/delete_product/<int:product_id>", methods=["POST"])
 def delete_product(product_id):
+    product = database.get_products(product_id)
 
-    database.delete_product(product_id)
+    if not product:
+        return redirect(url_for("index"))
+    
+    user_id = session["user_id"]
+    type_user = session["type_user"]
+
+    if product["user_id"] == user_id or type_user == "super_admin":
+        database.delete_product(product_id)
+    
     return redirect(url_for('index'))
 
 @app.route("/add_to_cart/<int:product_id>")
