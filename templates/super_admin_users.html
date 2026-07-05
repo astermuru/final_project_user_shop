@@ -10,12 +10,28 @@
     <h1>Users</h1>
     {% for user in users %}
         <div class="auth-container">
-            <p>Login: {{ user["1"] }}</p>
-            <p>Type: {{ user["3"] }}</p>
+            <p>Логин: {{ user[1] }}</p>
+            {% if user[2] == 1 %}
+                <p>Тип: пользователь(user)</p>
+            {% elif user[2] == 2 %}
+                <p>Тип: продавец(admin)</p>
+            {% elif user[2] == 3 %}
+                <p>Тип: суперадминистратор(super_admin)</p>
+            {% else %}
+                <p>Ошибка</p>
+            {% endif %}
 
-            <form method ="post" action="/super_admin/delete_user/{{ user['id']}}">
+
+            {% if user[3] %}
+                <p>Товар: {{ user[4] }}</p>
+            {% else %}
+                <p>Товаров нет</p>
+            {% endif %}
+
+            <form method ="post" action="/super_admin/delete_user/{{ user[0] }}">
                 <button type="submit" class="btn">Удалить</button>
             </form>
+
         </div>
     {% endfor %}
 </body>
