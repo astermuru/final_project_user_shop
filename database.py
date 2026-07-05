@@ -293,7 +293,7 @@ def delete_products_by_user(user_id):
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
 
-    cursor.execute("DELETE FROM products WHERE user_id = ?", (user_id))
+    cursor.execute("DELETE FROM products WHERE user_id = ?", (int(user_id), ))
 
     conn.commit()
     conn.close()
@@ -306,7 +306,7 @@ def get_users_with_products():
                         user.id, 
                         user.login, 
                         user.type_user,
-                        GROUP_CONCAT(products.name) AS products
+                        GROUP_CONCAT(products.name, ', | ') AS products
                    FROM user 
                    LEFT JOIN products ON products.user_id = user.id
                    GROUP BY user.id
