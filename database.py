@@ -298,6 +298,17 @@ def delete_products_by_user(user_id):
     conn.commit()
     conn.close()
 
+def get_users_with_products():
+    conn = sqlite3.connect("shop.db")
+    cursor = conn.cursor()
+
+    cursor.execute(""" SELECT user.id, user.login, user.type_user, products.id, products.name FROM user LEFT JOIN products ON products.user_id = user.id""")
+
+    user_products = cursor.fetchall()
+    conn.close()
+
+    return user_products
+
 if __name__ == "__main__":
     create_database()
     print(get_products())
