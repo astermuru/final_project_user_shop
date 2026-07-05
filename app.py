@@ -257,8 +257,9 @@ def delete_user(user_id):
     user = database.get_user_by_id(user_id)
 
     # удаляем товары
-    if user["type_user"] == 3:
-        database.delete_products_by_user(user_id)
+    # if user["type_user"] == 3:
+        
+    database.delete_products_by_user(user_id)
     # удаляем пользователя
     database.delete_user(user_id)
 
