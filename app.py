@@ -243,7 +243,7 @@ def admin_users():
     if type_user != 3:
         return "Нет доступа"
     
-    users = database.get_users()
+    users = database.get_users_with_products()
     return render_template("super_admin_users.html", users = users)
 
 @app.route("/super_admin/delete_user/<int:user_id>", methods=["POST"])
@@ -257,7 +257,7 @@ def delete_user(user_id):
     user = database.get_user_by_id(user_id)
 
     # удаляем товары
-    if user["type_user"] == "super_admin":
+    if user["type_user"] == 3:
         database.delete_products_by_user(user_id)
     # удаляем пользователя
     database.delete_user(user_id)
