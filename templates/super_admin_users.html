@@ -22,10 +22,12 @@
             {% endif %}
 
 
-            {% if user[3] %}
-                <p>Товар: {{ user[4] }}</p>
-            {% else %}
+            {% if user[2] %}
+                <p>Товар: {{ user[3] }}</p>
+            {% elif not user[3]  %}
                 <p>Товаров нет</p>
+            {% else %}
+                <p>Ошибка</p>
             {% endif %}
 
             <form method ="post" action="/super_admin/delete_user/{{ user[0] }}">
