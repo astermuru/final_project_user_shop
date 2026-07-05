@@ -293,7 +293,15 @@ def delete_products_by_user(user_id):
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
 
+    cursor.execute("SELECT * FROM products WHERE user_id = ?", (int(user_id), ))
+
+    product = cursor.fetchone()
+    image_path = product[6]
+    if os.path.exists(image_path):
+        os.remove(image_path)
+
     cursor.execute("DELETE FROM products WHERE user_id = ?", (int(user_id), ))
+    
 
     conn.commit()
     conn.close()
