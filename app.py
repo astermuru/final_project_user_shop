@@ -254,11 +254,16 @@ def delete_user(user_id):
     if type_user != 3:
         return "Нет доступа"
     
-    user = database.get_user_by_id(user_id)
+    products = database.get_products_by_user(user_id)
+    # удаление картинки
+    for product in products:
+        image_path = product[6]
+        if image_path:
+            full_path = os.path.join("uploads", image_path)
+            if os.path.exists(full_path):
+                os.remove(full_path)
 
     # удаляем товары
-    # if user["type_user"] == 3:
-        
     database.delete_products_by_user(user_id)
     # удаляем пользователя
     database.delete_user(user_id)
