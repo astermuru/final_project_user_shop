@@ -318,6 +318,19 @@ def get_users_with_products():
 
     return user_products
 
+def get_products_by_user(user_id):
+    conn = sqlite3.connect("shop.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT * FROM products WHERE user_id = ?
+    """, (user_id,))
+
+    products = cursor.fetchall()
+    conn.close()
+    
+    return products
+
 if __name__ == "__main__":
     create_database()
     print(get_products())
