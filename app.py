@@ -256,12 +256,12 @@ def delete_user(user_id):
     
     products = database.get_products_by_user(user_id)
     # удаление картинки
-    for product in products:
-        image_path = product[6]
-        if image_path:
-            full_path = os.path.join("uploads", image_path)
-            if os.path.exists(full_path):
-                os.remove(full_path)
+    # for product in products:
+    #     image_path = product[6]
+    #     if image_path:
+    #         full_path = os.path.join("static", "aploads", image_path)
+    #         if os.path.exists(full_path):
+    #             os.remove(full_path)
 
     # удаляем товары
     database.delete_products_by_user(user_id)
