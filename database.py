@@ -205,6 +205,9 @@ def validate_cart(cart):
     conn = sqlite3.connect("shop.db")
     cursor = conn.cursor()
 
+    if not isinstance(cart, dict):
+        return {}
+
     ids = list(cart.keys())
     for i in ids:
         cursor.execute("SELECT * FROM products WHERE id=?", (int(i),))
