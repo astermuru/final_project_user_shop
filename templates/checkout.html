@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    {% include '_navbar.html' %}
+    <div class="container">
+        <h2>Оплата прошла успешно</h2>
+        <a href="{{ url_for('clear_cart') }}"><button class="btn">На главную</button>
+    </div>
+</body>
+</html>
