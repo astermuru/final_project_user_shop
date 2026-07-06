@@ -272,7 +272,11 @@ def delete_user(user_id):
 
 @app.route("/checkout")
 def checkout():
-    return render_template("checkout.html")
+    cart = session.get("cart", {})
+    if len(cart) == 0:
+        return redirect(url_for("cart"))
+    
+    return render_template("checkout.html", cart = cart, )
 
 @app.route("/clear_cart")
 def clear_cart():
