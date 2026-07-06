@@ -270,5 +270,15 @@ def delete_user(user_id):
 
     return redirect(url_for("admin_users"))
 
+@app.route("/checkout")
+def checkout():
+    return render_template("checkout.html")
+
+@app.route("/clear_cart")
+def clear_cart():
+    session["cart"] = {}
+    return redirect(url_for("index"))
+
+
 if __name__ == "__main__":
     app.run(debug=True)
