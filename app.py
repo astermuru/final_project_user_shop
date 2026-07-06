@@ -250,23 +250,21 @@ def admin_users():
 def delete_user(user_id):
 
     type_user = session.get("type_user")
+    current_user_id = session.get("user_id")
 
     if type_user != 3:
         return "Нет доступа"
     
     products = database.get_products_by_user(user_id)
-    # удаление картинки
-    # for product in products:
-    #     image_path = product[6]
-    #     if image_path:
-    #         full_path = os.path.join("static", "aploads", image_path)
-    #         if os.path.exists(full_path):
-    #             os.remove(full_path)
-
+    
     # удаляем товары
     database.delete_products_by_user(user_id)
     # удаляем пользователя
     database.delete_user(user_id)
+
+    if user_id == current_user_id:
+        session.clear()
+        return render_template("register_or_login.html")
 
     return redirect(url_for("admin_users"))
 
