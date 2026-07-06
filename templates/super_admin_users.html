@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     {% include '_navbar.html' %}
     <h1>Users</h1>
     {% for user in users %}
-        <div class="auth-container">
+        <div class="container">
             <p>Логин: {{ user[1] }}</p>
             {% if user[2] == 1 %}
                 <p>Тип: пользователь(user)</p>
