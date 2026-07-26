@@ -193,7 +193,11 @@ def login_page():
         login = request.form["login"]
         password = request.form["password"]
         user = database.auth_user(login, password)
+<<<<<<< Updated upstream
         
+=======
+
+>>>>>>> Stashed changes
         if user:
             print("Успешный вход")
             session["user_id"] =  user["id"]
