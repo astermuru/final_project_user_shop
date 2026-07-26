@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    {% include '_navbar.html' %}
+
+    <div class="container">
+        <h1 style="text-align: center; font-weight: 500;">Users</h1>
+        <div class="cart-table">   <!-- именно этот класс даёт градиент и цвета с фото -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Логин</th>
+                        <th>Тип пользователя</th>
+                        <th>Товары</th>
+                        <th>Действие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user[1] }}</td>
+                        <td>
+                            {% if user[2] == 1 %}
+                                пользователь (user)
+                            {% elif user[2] == 2 %}
+                                продавец (admin)
+                            {% elif user[2] == 3 %}
+                                суперадминистратор (super_admin)
+                            {% else %}
+                                Ошибка
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if user[3] is not none %}
+                                {{ user[3] }}
+                            {% else %}
+                                Товаров нет
+                            {% endif %}
+                        </td>
+                        <td>
+                            <form method="post" action="/super_admin/delete_user/{{ user[0] }}">
+                                <button type="submit" class="btn btn-danger">Удалить</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

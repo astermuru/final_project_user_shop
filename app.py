@@ -43,8 +43,10 @@ def add_product():
         image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         image.save(image_path)
 
+        #берем ID пользователя
+        user_id = session["user_id"]
         #создать запись в БД
-        database.add_product(name, price, type_products, description, image_path)
+        database.add_product(name, price, type_products, user_id, description, image_path)
         return redirect(url_for('index'))
     else:
         return render_template("add_product.html")
@@ -58,8 +60,8 @@ def product(product_id):
     # else:
     #     type_user = None
 
-    if  "type_user" not in session:
-        return redirect("login.html")
+    if  "user_id" not in session:
+        return redirect(url_for("login_page"))
     else:
         type_user = session["type_user"]
     #user_type = "user"
@@ -70,8 +72,17 @@ def product(product_id):
 
 @app.route("/delete_product/<int:product_id>", methods=["POST"])
 def delete_product(product_id):
+    product = database.get_product_by_id(product_id)
 
-    database.delete_product(product_id)
+    if not product:
+        return redirect(url_for("index"))
+    
+    user_id = session["user_id"]
+    type_user = session["type_user"]
+
+    if product["user_id"] == user_id or type_user == "super_admin":
+        database.delete_product(product_id)
+    
     return redirect(url_for('index'))
 
 @app.route("/add_to_cart/<int:product_id>")
@@ -182,8 +193,12 @@ def login_page():
         login = request.form["login"]
         password = request.form["password"]
         user = database.auth_user(login, password)
+<<<<<<< Updated upstream
+        
+=======
 
-        if user != {}:
+>>>>>>> Stashed changes
+        if user:
             print("Успешный вход")
             session["user_id"] =  user["id"]
             session["login"] = user["login"]
@@ -224,9 +239,52 @@ def utility_processor():
     return dict(cart_count=get_cart_count())
     
     
+@app.route("/super_admin/users")
+def admin_users():
 
+    type_user = session.get("type_user")
 
+    if type_user != 3:
+        return "Нет доступа"
     
+    users = database.get_users_with_products()
+    return render_template("super_admin_users.html", users = users)
+
+@app.route("/super_admin/delete_user/<int:user_id>", methods=["POST"])
+def delete_user(user_id):
+
+    type_user = session.get("type_user")
+    current_user_id = session.get("user_id")
+
+    if type_user != 3:
+        return "Нет доступа"
+    
+    products = database.get_products_by_user(user_id)
+    
+    # удаляем товары
+    database.delete_products_by_user(user_id)
+    # удаляем пользователя
+    database.delete_user(user_id)
+
+    if user_id == current_user_id:
+        session.clear()
+        return render_template("register_or_login.html")
+
+    return redirect(url_for("admin_users"))
+
+@app.route("/checkout")
+def checkout():
+    cart = session.get("cart", {})
+    if len(cart) == 0:
+        return redirect(url_for("cart"))
+    
+    return render_template("checkout.html", cart = cart, )
+
+@app.route("/clear_cart")
+def clear_cart():
+    session["cart"] = {}
+    return redirect(url_for("index"))
+
 
 if __name__ == "__main__":
     app.run(debug=True)

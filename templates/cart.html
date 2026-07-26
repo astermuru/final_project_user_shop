@@ -8,21 +8,15 @@
 </head>
 <body>
     {% include '_navbar.html' %}
+
+    <div class="loader-overlay" id="loaderOverlay">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Обработка платежа...</div>
+    </div>
+
     <div class="cart-table">
         <h1>Корзина</h1>
-        <!-- <style>
-            table{
-                border-collapse: collapse;
-                border: 2px solid rgb(140, 140, 140);
-                font-family: sans-serif;
-                font-size: 0.8rem;
-                letter-spacing: 1px;
-            }
-            th, td {
-                border: 2px solid rgb(140, 140, 140);
-                padding: 8px 10px;
-            }
-        </style> -->
+        
         <table>
             <tr>
                 <th>Фото</th>
@@ -65,9 +59,22 @@
                         <td style="font-weight: bold; color: #6b2821;">{{ cart_summa }} ₽</td>
                     </tr>
                 </tfoot>
-                
+                 
         </table>
+        <button class="btn" onclick="goToCheckout()">Перейти к оплате</button>
         
     </div>
+
+    <script>
+        function goToCheckout() {
+            // Показываем спиннер
+            document.getElementById('loaderOverlay').classList.add('active');
+
+            // Через 0.5 секунды переходим на страницу оплаты
+            setTimeout(function() {
+                window.location.href = "{{ url_for('checkout') }}";
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
