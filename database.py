@@ -37,7 +37,7 @@ def create_database():
             login VARCHAR(1000) NOT NULL,
             password VARCHAR(256) NOT NULL,
             type_user INTEGER,
-            FOREIGN KEY (type_user) REFERENCES Type_products(id)
+            FOREIGN KEY (type_user) REFERENCES Type_user(id)
         )
     ''')
     conn.commit()
