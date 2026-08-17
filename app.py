@@ -158,7 +158,7 @@ def regster_page():
             if key != secret_key_user:
               errors.append("А нельзя так! Неверный ключ.")
 
-        # проверка насуществующего пользвателя
+        # проверка на существующего пользователя
         if database.check_user_exists(login):
             errors.append("Такой пользователь уже существует")
 
@@ -199,7 +199,7 @@ def login_page():
             session["login"] = user["login"]
             session["type_user"] = user["type_user"]
             
-            # add user_type
+            
             return redirect(url_for("index"))
             
         else:
