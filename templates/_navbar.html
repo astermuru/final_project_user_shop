@@ -11,7 +11,7 @@
             <a href="/" class="logo">Цифровой <span>Маркет</span></a>
             <div class="nav-links">
                 <a href="/" class="logo">Главная</a>
-                <div class="cart-img">
+                <div class="cart-img" data-count="{{ cart_count }}">
                     <a href="{{ url_for('cart') }}">
                     <img src="{{ url_for('static', filename='img/basket.png') }}" alt="" width="50">
                     </a>
