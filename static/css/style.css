@@ -965,3 +965,23 @@ body {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+
+.cart-img {
+    position: relative;
+    width: 100px;
+}
+
+.cart-img::after {
+    content: attr(data-count);  /* ✅ берет число из атрибута data-count в HTML */
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: 20px;
+}
