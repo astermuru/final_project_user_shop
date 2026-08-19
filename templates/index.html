@@ -50,22 +50,22 @@
 
     
 
-            <div class="index-layout">
+        <div class="index-layout">
         <!-- Каталог слева -->
-        <div class="catalog-sidebar">
-            <h3>Каталог</h3>
-            <ul class="catalog-list">
-                <li><a href="{{ url_for('index') }}" {% if not cur_type or cur_type == 'all' %}class="active"{% endif %}>All Products</a></li>
-                {% for type in type_products %}
-                <li>
-                    <a href="{{ url_for('index', type_products=type[0]) }}" 
-                       {% if cur_type == type[0]|string %}class="active"{% endif %}>
-                        {{ type[1] }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+            <div class="catalog-sidebar">
+                <h3>Каталог</h3>
+                <ul class="catalog-list">
+                    <li><a href="{{ url_for('index') }}" {% if not cur_type or cur_type == 'all' %}class="active"{% endif %}>All Products</a></li>
+                    {% for type in type_products %}
+                    <li>
+                        <a href="{{ url_for('index', type_products=type[0]) }}" 
+                        {% if cur_type == type[0]|string %}class="active"{% endif %}>
+                            {{ type[1] }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
 
              <div class="products-right">
                 <h2>
