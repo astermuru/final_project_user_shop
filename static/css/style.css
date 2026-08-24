@@ -984,191 +984,101 @@ body {
 
 /* Планшеты (ширина до 1024px) */
 @media (max-width: 1024px) {
-    .nav-links {
-        gap: 8px;
-    }
-    
-    .cart-img {
-        width: 60px;
-    }
-    
-    .cart-img img {
-        width: 38px !important;
-    }
-    
-    .cart-img::after {
-        width: 22px;
-        height: 22px;
-        font-size: 14px;
-        line-height: 22px;
-        right: 5px;
-        bottom: 5px;
-    }
-    
-    .profile-img img {
-        width: 45px !important;
-    }
-    
-    .logo {
-        font-size: 1.5rem;
-    }
+    .nav-links { gap: 15px; }
+    .cart-img { width: 70px; }
+    .cart-img img { width: 45px !important; }
+    .cart-img::after { width: 24px; height: 24px; font-size: 15px; line-height: 24px; right: 6px; bottom: 6px; }
+    .profile-img img { width: 55px !important; }
+    .logo { font-size: 2rem; }
 }
 
-/* Телефоны (ширина до 768px) — КАТАЛОГ СЛЕВА, ТОВАРЫ СПРАВА */
+/* Телефоны (ширина до 768px) — Каталог слева, товары в 1 колонку справа */
 @media (max-width: 768px) {
-    /* ШАПКА */
+    /* ШАПКА — увеличиваем размеры */
     .navbar .container {
         flex-direction: column;
         align-items: center;
-        gap: 6px;
-        padding: 10px;
+        gap: 15px;
+        padding: 20px 15px;
     }
+    .logo { font-size: 1.8rem; text-align: center; }
+    .nav-links { flex-wrap: wrap; justify-content: center; gap: 10px 20px; }
+    .nav-links a { font-size: 16px; }
     
-    .logo {
-        font-size: 1.2rem;
-        text-align: center;
-    }
-    
-    .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 5px 12px;
-    }
-    
-    .nav-links a {
-        font-size: 13px;
-    }
-    
-    .cart-img {
-        width: 50px;
-    }
-    
-    .cart-img img {
-        width: 30px !important;
-    }
-    
-    .cart-img::after {
-        width: 18px;
-        height: 18px;
-        font-size: 11px;
-        line-height: 18px;
-        right: 3px;
-        bottom: 3px;
-    }
-    
-    .profile-img img {
-        width: 35px !important;
-    }
-    
-    /* ГЛАВНАЯ СТРАНИЦА — КАТАЛОГ СЛЕВА, ТОВАРЫ СПРАВА */
+    .cart-img { width: 60px; }
+    .cart-img img { width: 40px !important; }
+    .cart-img::after { width: 22px; height: 22px; font-size: 14px; line-height: 22px; right: 4px; bottom: 4px; }
+    .profile-img img { width: 45px !important; }
+
+    /* ГЛАВНАЯ СТРАНИЦА — Каталог строго слева, товары строго справа */
     .index-layout {
-        flex-direction: row !important;  /* ← НЕ МЕНЯЕМ НА КОЛОНКУ! */
+        flex-direction: row !important;  /* Оставляем ряд! Каталог не переносим вниз */
+        align-items: flex-start;
         gap: 15px;
     }
     
+    /* Каталог слева */
     .catalog-sidebar {
         width: 140px !important;
         flex-shrink: 0;
         padding: 10px;
+        border-right: 1px solid #ddd; /* Добавляем границу для визуального разделения */
     }
-    
-    .catalog-sidebar h3 {
-        font-size: 14px;
-        margin-bottom: 10px;
-    }
-    
-    .catalog-list a {
-        font-size: 12px;
-        padding: 3px 0;
-    }
-    
+    .catalog-sidebar h3 { font-size: 18px; margin-bottom: 10px; }
+    .catalog-list a { font-size: 14px; padding: 5px 0; display: block; }
+
+    /* ТОВАРЫ СПРАВА — Одна колонка на всю ширину */
     .products {
-        gap: 10px;
+        flex: 1 !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important; /* Строго один товар под другим */
+        gap: 20px;
         justify-content: flex-start;
     }
     
     .product {
-        width: calc(50% - 10px) !important;
-        max-width: 200px;
-        padding: 10px;
+        width: 100% !important; /* На всю ширину правой части */
+        max-width: none !important;
+        padding: 15px;
+        box-sizing: border-box;
     }
     
-    .product h3 {
-        font-size: 13px;
-    }
+    .product h3 { font-size: 22px; }
+    .product p { font-size: 16px; margin: 8px 0; }
     
-    .product p {
-        font-size: 11px;
-        margin: 4px 0;
-    }
-    
+    /* Картинки товаров делаем большими */
     .product img {
-        height: 100px;
+        width: 100% !important;
+        height: auto !important;
+        max-height: 350px;
+        object-fit: contain;
     }
     
+    /* Кнопки крупные на всю ширину */
     .btn {
-        font-size: 10px;
-        padding: 4px 10px;
+        font-size: 18px;
+        padding: 15px;
+        width: 100%;
+        display: block;
     }
 }
 
 /* Маленькие телефоны (до 480px) */
 @media (max-width: 480px) {
-    .logo {
-        font-size: 1rem;
-    }
+    .logo { font-size: 1.5rem; }
+    .nav-links { gap: 8px 15px; }
+    .nav-links a { font-size: 14px; }
+    .cart-img img { width: 35px !important; }
+    .profile-img img { width: 40px !important; }
     
-    .nav-links {
-        gap: 4px 8px;
-    }
-    
-    .nav-links a {
-        font-size: 11px;
-    }
-    
-    .cart-img img {
-        width: 24px !important;
-    }
-    
-    .profile-img img {
-        width: 28px !important;
-    }
-    
-    .catalog-sidebar {
-        width: 100px !important;
-        padding: 8px;
-    }
-    
-    .catalog-sidebar h3 {
-        font-size: 12px;
-    }
-    
-    .catalog-list a {
-        font-size: 10px;
-        padding: 2px 0;
-    }
-    
-    .product {
-        width: calc(50% - 8px) !important;
-        max-width: 160px;
-        padding: 8px;
-    }
-    
-    .product h3 {
-        font-size: 11px;
-    }
-    
-    .product p {
-        font-size: 10px;
-    }
-    
-    .product img {
-        height: 80px;
-    }
-    
-    .btn {
-        font-size: 9px;
-        padding: 3px 8px;
-    }
+    /* Сужаем каталог, чтобы товарам справа осталось больше места */
+    .catalog-sidebar { width: 100px !important; padding: 8px; }
+    .catalog-sidebar h3 { font-size: 16px; }
+    .catalog-list a { font-size: 12px; }
+
+    .product { padding: 10px; }
+    .product h3 { font-size: 20px; }
+    .product p { font-size: 15px; }
+    .btn { font-size: 16px; padding: 12px; }
 }
