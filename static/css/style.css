@@ -980,57 +980,43 @@ body {
 }
 
 
-/* ===== АДАПТИВНОСТЬ  ===== */
+/* ===== АДАПТИВНОСТЬ ===== */
 
 /* Планшеты (ширина до 1024px) */
 @media (max-width: 1024px) {
-    .navbar .container {
-        flex-wrap: wrap;
-        justify-content: center;
+    .nav-links {
         gap: 8px;
     }
     
-    .nav-links {
-        gap: 8px;
-        flex-wrap: wrap;
-        justify-content: center;
+    .cart-img {
+        width: 60px;
+    }
+    
+    .cart-img img {
+        width: 38px !important;
+    }
+    
+    .cart-img::after {
+        width: 22px;
+        height: 22px;
+        font-size: 14px;
+        line-height: 22px;
+        right: 5px;
+        bottom: 5px;
+    }
+    
+    .profile-img img {
+        width: 45px !important;
     }
     
     .logo {
         font-size: 1.5rem;
     }
-    
-    .cart-img {
-        width: 50px !important;
-        display: inline-block;
-    }
-    
-    .cart-img img {
-        width: 35px !important;
-        height: auto;
-    }
-    
-    .cart-img::after {
-        width: 20px;
-        height: 20px;
-        font-size: 12px;
-        line-height: 20px;
-        right: 2px;
-        bottom: 2px;
-    }
-    
-    .profile-img {
-        display: inline-block;
-    }
-    
-    .profile-img img {
-        width: 40px !important;
-        height: auto;
-    }
 }
 
-/* Телефоны (ширина до 768px) */
+/* Телефоны (ширина до 768px) — КАТАЛОГ СЛЕВА, ТОВАРЫ СПРАВА */
 @media (max-width: 768px) {
+    /* ШАПКА */
     .navbar .container {
         flex-direction: column;
         align-items: center;
@@ -1047,7 +1033,7 @@ body {
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        gap: 5px 10px;
+        gap: 5px 12px;
     }
     
     .nav-links a {
@@ -1055,24 +1041,75 @@ body {
     }
     
     .cart-img {
-        width: 40px !important;
+        width: 50px;
     }
     
     .cart-img img {
-        width: 28px !important;
+        width: 30px !important;
     }
     
     .cart-img::after {
-        width: 16px;
-        height: 16px;
-        font-size: 10px;
-        line-height: 16px;
-        right: 2px;
-        bottom: 2px;
+        width: 18px;
+        height: 18px;
+        font-size: 11px;
+        line-height: 18px;
+        right: 3px;
+        bottom: 3px;
     }
     
     .profile-img img {
-        width: 32px !important;
+        width: 35px !important;
+    }
+    
+    /* ГЛАВНАЯ СТРАНИЦА — КАТАЛОГ СЛЕВА, ТОВАРЫ СПРАВА */
+    .index-layout {
+        flex-direction: row !important;  /* ← НЕ МЕНЯЕМ НА КОЛОНКУ! */
+        gap: 15px;
+    }
+    
+    .catalog-sidebar {
+        width: 140px !important;
+        flex-shrink: 0;
+        padding: 10px;
+    }
+    
+    .catalog-sidebar h3 {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    
+    .catalog-list a {
+        font-size: 12px;
+        padding: 3px 0;
+    }
+    
+    .products {
+        gap: 10px;
+        justify-content: flex-start;
+    }
+    
+    .product {
+        width: calc(50% - 10px) !important;
+        max-width: 200px;
+        padding: 10px;
+    }
+    
+    .product h3 {
+        font-size: 13px;
+    }
+    
+    .product p {
+        font-size: 11px;
+        margin: 4px 0;
+    }
+    
+    .product img {
+        height: 100px;
+    }
+    
+    .btn {
+        font-size: 10px;
+        padding: 4px 10px;
     }
 }
 
@@ -1083,31 +1120,55 @@ body {
     }
     
     .nav-links {
-        gap: 4px 6px;
+        gap: 4px 8px;
     }
     
     .nav-links a {
         font-size: 11px;
     }
     
-    .cart-img {
-        width: 32px !important;
-    }
-    
     .cart-img img {
-        width: 22px !important;
-    }
-    
-    .cart-img::after {
-        width: 14px;
-        height: 14px;
-        font-size: 8px;
-        line-height: 14px;
-        right: 1px;
-        bottom: 1px;
+        width: 24px !important;
     }
     
     .profile-img img {
-        width: 26px !important;
+        width: 28px !important;
+    }
+    
+    .catalog-sidebar {
+        width: 100px !important;
+        padding: 8px;
+    }
+    
+    .catalog-sidebar h3 {
+        font-size: 12px;
+    }
+    
+    .catalog-list a {
+        font-size: 10px;
+        padding: 2px 0;
+    }
+    
+    .product {
+        width: calc(50% - 8px) !important;
+        max-width: 160px;
+        padding: 8px;
+    }
+    
+    .product h3 {
+        font-size: 11px;
+    }
+    
+    .product p {
+        font-size: 10px;
+    }
+    
+    .product img {
+        height: 80px;
+    }
+    
+    .btn {
+        font-size: 9px;
+        padding: 3px 8px;
     }
 }
