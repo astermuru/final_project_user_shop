@@ -592,12 +592,51 @@ body {
 
 
 /* ===== АДАПТИВНОСТЬ ===== */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .navbar .container {
         flex-direction: column;
         gap: 1rem;
     }
+} */
+
+/* Планшеты */
+@media (max-width: 1024px) {
+    .nav-links {
+        gap: 10px;
+    }
+    
+    .cart-img img {
+        width: 40px !important;
+    }
+    
+    .profile-img img {
+        width: 50px !important;
+    }
 }
+
+/* Телефоны */
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 15px;
+    }
+    
+    .cart-img img {
+        width: 32px !important;
+    }
+    
+    .profile-img img {
+        width: 40px !important;
+    }
+}
+
 
 /* Красивая таблица корзины */
 .cart-table {
