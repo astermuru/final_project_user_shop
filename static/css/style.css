@@ -72,24 +72,10 @@ body {
     color: var(--primary);
 }
 
-.cart-badge {
-    background: var(--primary);
-    color: white;
-    border-radius: 30px;
-    padding: 0.2rem 0.6rem;
-    font-size: 0.75rem;
-    margin-left: 4px;
-}
 
-/* ===== ФОРМЫ (регистрация, вход, добавление товара) ===== */
-.form-container {
-    max-width: 500px;
-    margin: 2rem auto;
-    background: white;
-    padding: 2rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-}
+
+
+
 
 
 
@@ -99,19 +85,9 @@ body {
     font-weight: 500;
 }
 
-.form-control {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid var(--light-gray);
-    border-radius: 8px;
-    font-size: 1rem;
-}
 
-.form-control:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(67,97,238,0.2);
-}
+
+
 
 
 
@@ -134,34 +110,8 @@ body {
     margin-bottom: 1rem;
 }
 
-/* ===== АДМИН-ПАНЕЛЬ ===== */
-.admin-table {
-    width: 100%;
-    background: white;
-    border-radius: var(--border-radius);
-    overflow-x: auto;
-}
 
-.admin-table table {
-    width: 100%;
-    border-collapse: collapse;
-}
 
-.admin-table th, .admin-table td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid var(--light-gray);
-}
-
-/* ===== ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ ===== */
-.profile-card {
-    background: white;
-    padding: 2rem;
-    border-radius: var(--border-radius);
-    text-align: center;
-    max-width: 500px;
-    margin: 2rem auto;
-}
 .btn {
     display: inline-block;
     padding: 10px 24px;
@@ -288,49 +238,6 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-}
-
-.product-item {
-    width: calc(33.333% - 14px);
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-.product-img {
-    width: 100%;
-    height: 200px;
-    background: #f5f5f5;
-    object-fit: cover;
-}
-
-.product-details {
-    padding: 12px;
-}
-
-.product-name {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 8px;
-    color: #333;
-}
-
-.product-price {
-    font-size: 14px;
-    color: #e74c3c;
-    margin-bottom: 10px;
-    font-weight: 500;
-}
-
-.btn-add {
-    background: #0066cc;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 12px;
 }
 
 .btn-add:hover {
@@ -549,30 +456,7 @@ body {
     font-weight: 500;
 }
 
-.profile-stats {
-    display: flex;
-    justify-content: space-around;
-    margin: 30px 0;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 15px;
-}
 
-.stat {
-    text-align: center;
-}
-
-.stat-number {
-    font-size: 28px;
-    font-weight: 800;
-    color: #667eea;
-}
-
-.stat-label {
-    font-size: 12px;
-    color: #888;
-    margin-top: 5px;
-}
 
 .profile-buttons {
     display: flex;
@@ -587,19 +471,6 @@ body {
     border-radius: 10px;
     font-weight: 600;
 }
-
-
-
-
-/* ===== АДАПТИВНОСТЬ ===== */
-/* @media (max-width: 768px) {
-    .navbar .container {
-        flex-direction: column;
-        gap: 1rem;
-    }
-} */
-
-
 
 
 /* Красивая таблица корзины */
@@ -643,27 +514,6 @@ body {
     border-radius: 10px;
 }
 
-
-
-/* Выделение итога */
-.cart-total {
-    background: white;
-    border-radius: 16px;
-    margin-top: 20px;
-    padding: 15px 20px;
-    text-align: right;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    border-top: 2px solid #667eea;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-
-.cart-total span {
-    color: #e74c3c;
-    font-size: 24px;
-    margin-left: 15px;
-} 
 
 .cart-table h1 {
     margin-bottom: 20px;
@@ -867,29 +717,7 @@ body {
     font-weight: 700;
 }
 
-/* Ошибки */
-.auth-errors {
-    background: #fee;
-    border-left: 4px solid #e74c3c;
-    padding: 12px;
-    border-radius: 8px;
-    margin-top: 20px;
-}
 
-.auth-errors p {
-    color: #e74c3c;
-    margin: 5px 0;
-    font-size: 14px;
-}
-
-
-
-/* Ссылка на переключение формы */
-.auth-link {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
-}
 
 .auth-link a {
     color: #667eea;
